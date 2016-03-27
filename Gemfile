@@ -55,3 +55,4 @@ end
 
 gem 'devise'
 gem 'figaro', '~> 1.1'
+gem 'simple_form'
