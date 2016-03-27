@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :pool
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

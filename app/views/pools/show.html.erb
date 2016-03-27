@@ -1,0 +1,6 @@
+<h2><%= @pool.name.titleize %> Pool</h2>
+<h4>Pool members</h4>
+
+<% @pool.users.each do |user| %>
+  <p><%= user.full_name %></p>
+<% end %>

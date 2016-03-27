@@ -1,4 +1,5 @@
 class PoolsController < ApplicationController
+
   def new
     @pool = Pool.new
   end
@@ -8,11 +9,15 @@ class PoolsController < ApplicationController
 
     if @pool.save && current_user.update!(pool: @pool)
       flash[:notice] = "Your pool has been created"
-      redirect_to root_path
+      redirect_to @pool
     else
       flash[:error] = "There was a problem creating your pool.  Please try again."
       render :new
     end
+  end
+
+  def show
+    @pool = Pool.find(params[:id])
   end
 
   private
@@ -20,4 +25,5 @@ class PoolsController < ApplicationController
   def pool_params
     params.require(:pool).permit(:name)
   end
+
 end
