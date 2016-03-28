@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :pools, only: [:new, :create, :show]
+  resources :pools
 
   root 'welcome#index'
 end

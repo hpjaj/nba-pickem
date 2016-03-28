@@ -1,0 +1,18 @@
+<h2>Current Pools</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Members</td>
+    </tr>
+
+    <% @pools.each do |pool| %>
+      <tr>
+        <td><%= pool.name.titleize %></td>
+        <td><%= pool.users.count %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
