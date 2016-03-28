@@ -9,15 +9,19 @@ RSpec.describe PoolsController, :type => :controller do
   end
 
   context "POST create" do
-    it "the new pool and the current user are correctly associated" do
-      expect(user.pool_id).to eq nil
-
+    before do
       params = { pool: { name: 'hpjaj' } }
       post :create, params
       user.reload
+    end
 
-      expect(user.pool).to eq Pool.first
+    it "the new pool and the current user are correctly associated" do
+      expect(user.pools).to eq [Pool.first]
       expect(Pool.first.users).to eq [user]
+    end
+
+    it "makes the user the pool's commissioner" do
+      expect(Pool.first.commissioner).to eq user.commissioners.first
     end
   end
 end

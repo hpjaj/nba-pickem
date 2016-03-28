@@ -5,9 +5,7 @@ class PoolsController < ApplicationController
   end
 
   def create
-    @pool = Pool.new(pool_params)
-
-    if @pool.save && current_user.update!(pool: @pool)
+    if pool_creation_transaction
       flash[:notice] = "Your pool has been created"
       redirect_to @pool
     else
@@ -24,6 +22,19 @@ class PoolsController < ApplicationController
 
   def pool_params
     params.require(:pool).permit(:name)
+  end
+
+  def pool_creation_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @pool = current_user.pools.create!(pool_params)
+        commissioner = current_user.commissioners.create!
+        @pool.update!(commissioner: commissioner)
+      rescue Exception => e
+        logger.error "User #{current_user.id} experience #{e.message} when trying to create a new pool"
+        false
+      end
+    end
   end
 
 end
