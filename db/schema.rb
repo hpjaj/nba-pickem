@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328034107) do
+ActiveRecord::Schema.define(version: 20160328044959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20160328034107) do
 
   add_index "pools_users", ["pool_id"], name: "index_pools_users_on_pool_id", using: :btree
   add_index "pools_users", ["user_id"], name: "index_pools_users_on_user_id", using: :btree
+
+  create_table "series", force: :cascade do |t|
+    t.string   "away_team_id"
+    t.string   "home_team_id"
+    t.integer  "away_team_wins"
+    t.integer  "home_team_wins"
+    t.string   "round"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
