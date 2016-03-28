@@ -1,0 +1,12 @@
+<% @series.each do |game| %>
+  <div>
+    <p><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></p>
+
+    <% if pick = completed_pick(@picks, game) %>
+      <p> <%= pick.away_team_wins %> <%= pick.home_team_wins %> </p>
+    <% else %>
+      <p><%= link_to "Make your picks", new_pick_path.concat("?series=#{game.id}") %></p>
+    <% end %>
+
+  </div>
+<% end %>

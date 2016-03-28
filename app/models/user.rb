@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :pools
   has_many :commissioners
+  has_many :picks
 
   def full_name
     "#{first_name} #{last_name}"
