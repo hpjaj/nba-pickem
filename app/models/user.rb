@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :pool
+  has_and_belongs_to_many :pools
 
   def full_name
     "#{first_name} #{last_name}"
