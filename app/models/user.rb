@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :pools
+  has_many :commissioners
 
   def full_name
     "#{first_name} #{last_name}"
