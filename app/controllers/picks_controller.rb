@@ -1,9 +1,10 @@
 class PicksController < ApplicationController
 
   def index
-    @picks       = current_user.picks
-    @east_series = Series.joins('INNER JOIN nba_teams ON nba_teams.team_id = series.away_team_id').where('nba_teams.conference = ?', 'East').where(round: '1')
-    @west_series = Series.joins('INNER JOIN nba_teams ON nba_teams.team_id = series.away_team_id').where('nba_teams.conference = ?', 'West').where(round: '1')
+    @round_one_picks = Pick.for_round('1', current_user)
+    @east_series     = Series.round_one_for('East')
+    @west_series     = Series.round_one_for('West')
+    @round_two_picks = Pick.for_round('2', current_user)
   end
 
   def new
