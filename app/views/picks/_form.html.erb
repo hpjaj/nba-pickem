@@ -1,0 +1,16 @@
+<%
+  series = @pick.series || Series.find(params[:series] || params[:pick][:series_id])
+  away   = series.away_team_id.titleize
+  home   = series.home_team_id.titleize
+%>
+
+<h4><%= away %> vs. <%= home %></h4>
+
+<div>
+  <%= simple_form_for @pick do |f| %>
+    <p><%= f.input :away_team_wins, label: "#{away} wins" %></p>
+    <p><%= f.input :home_team_wins, label: "#{home} wins" %></p>
+       <%= f.input :series_id, as: :hidden, input_html: { value: "#{series.id}" } %>
+    <p><%= f.button :submit %> <%= link_to 'Cancel', picks_path %></p>
+  <% end %>
+</div>

@@ -7,9 +7,9 @@
     <div class="east">
       <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
 
-      <% if pick = completed_pick(@picks, game) %>
-        <p><%= game.away_team_id.titleize %>: <%= pick.away_team_wins %></p>
-        <p><%= game.home_team_id.titleize -%>: <%= pick.home_team_wins %></p>
+      <% if pick = completed_pick(@round_one_picks, game) %>
+        <p><%= link_to "#{game.away_team_id.titleize} : #{pick.away_team_wins}", edit_pick_path(pick) %></p>
+        <p><%= link_to "#{game.home_team_id.titleize} : #{pick.home_team_wins}", edit_pick_path(pick) %></p>
       <% else %>
         <p><%= link_to "Make your picks", new_pick_path.concat("?series=#{game.id}") %></p>
       <% end %>
@@ -22,7 +22,7 @@
     <div class="west">
       <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
 
-      <% if pick = completed_pick(@picks, game) %>
+      <% if pick = completed_pick(@round_one_picks, game) %>
         <p><%= game.away_team_id.titleize %>: <%= pick.away_team_wins %></p>
         <p><%= game.home_team_id.titleize -%>: <%= pick.home_team_wins %></p>
       <% else %>

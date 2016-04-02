@@ -21,6 +21,21 @@ class PicksController < ApplicationController
     end
   end
 
+  def edit
+    @pick = Pick.find(params[:id])
+  end
+
+  def update
+    @pick = Pick.find(params[:id])
+
+    if @pick.update!(picks_params)
+      redirect_to picks_path
+    else
+      flash[:error] = "There was a problem updating our pick.  Please try again."
+      render :edit
+    end
+  end
+
   private
 
   def picks_params
