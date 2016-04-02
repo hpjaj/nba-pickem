@@ -1,12 +1,35 @@
-<% @series.each do |game| %>
-  <div>
-    <p><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></p>
+<% if @east_series.present? %>
 
-    <% if pick = completed_pick(@picks, game) %>
-      <p> <%= pick.away_team_wins %> <%= pick.home_team_wins %> </p>
-    <% else %>
-      <p><%= link_to "Make your picks", new_pick_path.concat("?series=#{game.id}") %></p>
-    <% end %>
+  <h2>Round <%= @east_series.first.round %></h2>
 
-  </div>
+  <h3>East Conference</h3>
+  <% @east_series.each do |game| %>
+    <div class="east">
+      <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
+
+      <% if pick = completed_pick(@picks, game) %>
+        <p><%= game.away_team_id.titleize %>: <%= pick.away_team_wins %></p>
+        <p><%= game.home_team_id.titleize -%>: <%= pick.home_team_wins %></p>
+      <% else %>
+        <p><%= link_to "Make your picks", new_pick_path.concat("?series=#{game.id}") %></p>
+      <% end %>
+
+    </div>
+  <% end %>
+
+  <h3>West Conference</h3>
+  <% @west_series.each do |game| %>
+    <div class="west">
+      <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
+
+      <% if pick = completed_pick(@picks, game) %>
+        <p><%= game.away_team_id.titleize %>: <%= pick.away_team_wins %></p>
+        <p><%= game.home_team_id.titleize -%>: <%= pick.home_team_wins %></p>
+      <% else %>
+        <p><%= link_to "Make your picks", new_pick_path.concat("?series=#{game.id}") %></p>
+      <% end %>
+
+    </div>
+  <% end %>
+
 <% end %>

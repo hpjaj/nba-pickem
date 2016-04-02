@@ -10,7 +10,7 @@
   <%= simple_form_for @pick do |f| %>
     <p><%= f.input :away_team_wins, label: "#{away} wins" %></p>
     <p><%= f.input :home_team_wins, label: "#{home} wins" %></p>
-    <%= f.input :series_id, as: :hidden, input_html: { value: "#{series.id}" } %>
+       <%= f.input :series_id, as: :hidden, input_html: { value: "#{series.id}" } %>
     <p><%= f.button :submit %></p>
   <% end %>
 </div>
