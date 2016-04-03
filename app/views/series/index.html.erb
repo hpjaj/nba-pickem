@@ -1,0 +1,42 @@
+<% if @east_series.present? %>
+
+  <h2>Round <%= @east_series.first.round %></h2>
+
+  <h3>East Conference</h3>
+  <% @east_series.each do |game| %>
+    <div class="east">
+      <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
+
+      <% if game.home_team_wins.present? && game.away_team_wins.present? %>
+        <p><%= link_to "#{game.away_team_id.titleize} : #{game.away_team_wins}", edit_series_path(game) %></p>
+        <p><%= link_to "#{game.home_team_id.titleize} : #{game.home_team_wins}", edit_series_path(game) %></p>
+      <% else %>
+        <p><%= link_to "Make your picks", edit_series_path(game) %></p>
+      <% end %>
+
+    </div>
+  <% end %>
+
+  <h3>West Conference</h3>
+  <% @west_series.each do |game| %>
+    <div class="west">
+      <h3><%= game.away_team_id.titleize -%> vs. <%= game.home_team_id.titleize -%></h3>
+
+      <% if game.home_team_wins.present? && game.away_team_wins.present? %>
+        <p><%= link_to "#{game.away_team_id.titleize} : #{game.away_team_wins}", edit_series_path(game) %></p>
+        <p><%= link_to "#{game.home_team_id.titleize} : #{game.home_team_wins}", edit_series_path(game) %></p>
+      <% else %>
+        <p><%= link_to "Make your picks", edit_series_path(game) %></p>
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+  <% if @round_one_east_picks.present? || @round_one_west_picks.present? %>
+
+    <h2>Round 2</h2>
+
+  <% end %>
+
+<% end %>

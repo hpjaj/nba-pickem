@@ -13,8 +13,8 @@ describe "What the bracket should initially contain" do
 
   context "with no seeding" do
     it "should safely render the picks index page" do
-      visit picks_path
-      expect(current_path).to eq picks_path
+      visit series_index_path
+      expect(current_path).to eq series_index_path
     end
   end
 
@@ -25,7 +25,7 @@ describe "What the bracket should initially contain" do
     end
 
     it "should display all the teams playing in the first round" do
-      visit picks_path
+      visit series_index_path
 
       Series.where(round: '1').each do |game|
         expect(page).to have_content(game.away_team_id.titleize)
